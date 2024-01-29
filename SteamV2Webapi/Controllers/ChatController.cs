@@ -30,5 +30,11 @@ namespace SteamV2Webapi.Controllers
 
             return Ok();
         }
+        [HttpPost]
+        [Route("editMessage")]
+        public async Task<IActionResult> EditMessage(EditMessageDTO editMessage)
+        {
+            return Ok();
+        }
     }
 }

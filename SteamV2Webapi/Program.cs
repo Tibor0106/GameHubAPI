@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using PTHUWEBAPI.Database;
+using SteamV2Webapi;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 // Szolgáltatások hozzáadása a konténerhez.
@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-/*
+
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.ConfigureEndpointDefaults(listenOptions =>
@@ -22,7 +22,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
         listenOptions.UseHttps("certificate.pfx", "tibor@200616");
     });
 });
-*/
+
 var app = builder.Build();
 
 // HTTP kérési csõvezeték konfigurálása.
@@ -51,7 +51,7 @@ app.Use(async (context, next) =>
     else
     {
         //LOG
-        Console.WriteLine($"{context.Request.Method} request received for {context.Request.Path} " +
+        RequestManager.Requests.Add($"{context.Request.Method} request received for {context.Request.Path} " +
             $" => {DateTime.Now}");
 
         await next();

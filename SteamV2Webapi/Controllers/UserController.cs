@@ -20,12 +20,17 @@ namespace SteamV2Webapi.Controllers
          public async Task<IActionResult> register(RegisterDTO  reg)
          {
             
-
             return Ok();
          }
+        [HttpGet]
+        [Route("verify/{verifykey}")]
+        public async Task<IActionResult> getverify(string verifykey)
+        {
+            return Ok();
+        }
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> register(LoginDTO loginData)
+        public async Task<IActionResult> login(LoginDTO loginData)
         {
             return Ok();
         }
@@ -41,5 +46,18 @@ namespace SteamV2Webapi.Controllers
         {
             return Ok();
         }
+        [HttpGet]
+        [Route("getStats/{userid}")]
+        public async Task<IActionResult> getStats(int userid)
+        {
+            return Ok();
+        }
+        [HttpGet]
+        [Route("getStat/{userid}/{gameId}")]
+        public async Task<IActionResult> getStats(int userid, int gameId)
+        {
+            return Ok();
+        }
+
     }
 }
