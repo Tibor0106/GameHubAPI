@@ -1,0 +1,6 @@
+@SteamV2Webapi_HostAddress = http://localhost:5279
+
+GET {{SteamV2Webapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
