@@ -5,7 +5,7 @@
         public string Message { get; set; }
         public int MessageId { get; set; }
         public int senderId { get; set; }
-        public int reciverId { get; set; }
+        public int receiverId { get; set; }
 
     }
 }
