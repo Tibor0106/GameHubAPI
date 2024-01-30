@@ -1,3 +1,4 @@
+namespace Steam2WebApi.Objects;
 {
     public class Transactions
     {
