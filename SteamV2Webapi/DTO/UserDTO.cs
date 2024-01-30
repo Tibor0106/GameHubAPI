@@ -10,7 +10,7 @@ namespace SteamV2Webapi.DTO
         public string email { get; set; }
         public string password { get; set; }
         public string avatar { get; set; }
-        public DateTime create_at { get; set; }
+        public DateTime created_at { get; set; }
         public DateTime last_heartbeat { get; set;}
         public bool online { get; set; }
     }
