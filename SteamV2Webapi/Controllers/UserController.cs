@@ -40,7 +40,18 @@ namespace SteamV2Webapi.Controllers
         [Route("login")]
         public async Task<IActionResult> login(LoginDTO loginData)
         {
-            return Ok();
+            var User = _appDbContext.users.FirstOrDefault(i => i.email == loginData.email);
+            if(User == null)
+            {
+                User = _appDbContext.users.FirstOrDefault(i => i.username == loginData.username);
+            }
+            if (User == null) return BadRequest("this user does not exists.");
+
+            if (BCrypt.Net.BCrypt.Verify(loginData.password, User.password))
+            {
+                return Ok(User);
+            }
+            return BadRequest();
         }
         [HttpGet]
         [Route("getUserByName")]
