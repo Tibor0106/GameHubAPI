@@ -1,7 +1,6 @@
-﻿
-namespace SteamV2Webapi.DTO
+﻿namespace SteamV2Webapi.Objects
 {
-    public class UserDTO
+    public class User
     {
         public int Id { get; set; }
         public string name { get; set; }
@@ -10,10 +9,10 @@ namespace SteamV2Webapi.DTO
         public string password { get; set; }
         public string avatar { get; set; }
         public DateTime created_at { get; set; }
-        public DateTime last_heartbeat { get; set;}
+        public DateTime last_heartbeat { get; set; }
         public bool online { get; set; }
 
-        public UserDTO(int id, string name, string username, string email, string password, string avatar, DateTime created_at, DateTime last_heartbeat, bool online)
+        public User(int id, string name, string username, string email, string password, string avatar, DateTime created_at, DateTime last_heartbeat, bool online)
         {
             Id = id;
             this.name = name;

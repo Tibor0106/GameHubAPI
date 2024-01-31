@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.DTO;
@@ -19,14 +18,14 @@ namespace SteamV2Webapi.Controllers
 
         //limit messages 1 page = 20 message
         [HttpGet]
-        [Route("getUserMessages/{id}/{page}")]
-        public async Task<IActionResult> getMessages(int id, int page)
+        [Route("getUserMessages/{id}/{secondid}/{page}")]
+        public async Task<IActionResult> getMessages(int id, int secondid, int page)
         {
 
             int start = page;
             page *= 20;
             var messages = await _appDbContext.messages
-            .Where(m => m.senderId == id) //ez itt még kérdéses (melyik lenne jobb sender vagy a vevő )
+            .Where(m => (m.senderId == id || m.receiverId == id) && (m.senderId == secondid || m.receiverId == secondid)) //tudtommal ha jól értelmezem, ez a chateket hozná le, magyarul egy receiverid is kell és fordítva is. Ezért kell nekünk a datetime object, hogy sorba tudjuk rakni a messageket.
             .OrderByDescending(m => m.messageSent) 
             .Skip((start - 1) * page / start)
             .Take(page)

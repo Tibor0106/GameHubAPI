@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SteamV2Webapi.DTO;
 
-using System.Reflection.Metadata;
 using PTHUWEBAPI.Database;
+using SteamV2Webapi.Objects;
 
 namespace SteamV2Webapi.Controllers
 {
@@ -22,8 +21,8 @@ namespace SteamV2Webapi.Controllers
          {
             var cUser = _appDbContext.users.FirstOrDefault(i => i.email == reg.email);
             if (cUser != null) return BadRequest("this email already used !");
-            UserDTO user =
-                new UserDTO(0, reg.name, reg.username, 
+            User user =
+                new User(0, reg.name, reg.username, 
                 reg.email, BCrypt.Net.BCrypt.HashPassword(reg.password), "", 
                 DateTime.Now, DateTime.Now, false);
 

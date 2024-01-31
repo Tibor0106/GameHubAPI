@@ -9,5 +9,14 @@
         public int level { get; set; }
         public int achievements { get; set; }
 
+        public GameStats(int id, int userId, int gameId, int playerHours, int level, int achievements)
+        {
+            Id = id;
+            this.userId = userId;
+            this.gameId = gameId;
+            this.playerHours = playerHours;
+            this.level = level;
+            this.achievements = achievements;
+        }
     }
 }
