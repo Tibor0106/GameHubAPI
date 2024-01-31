@@ -54,10 +54,14 @@ namespace SteamV2Webapi.Controllers
             return BadRequest();
         }
         [HttpGet]
-        [Route("getUserByName")]
+        [Route("getUserByName/{username}")]
         public async Task<IActionResult> getByUsername(string username)
         {
-            return Ok();
+            var User = _appDbContext.users.FirstOrDefault(i => i.username == username);
+            if (User == null) BadRequest();
+            
+            
+             return Ok(User);
         }
         [HttpGet]
         [Route("getFriends/{userid}")]

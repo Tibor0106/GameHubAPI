@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PTHUWEBAPI.Database;
 
@@ -10,9 +11,11 @@ using PTHUWEBAPI.Database;
 namespace SteamV2Webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240131155012__i")]
+    partial class _i
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,26 +106,6 @@ namespace SteamV2Webapi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("game_stats");
-                });
-
-            modelBuilder.Entity("SteamV2Webapi.Objects.Library", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("gameId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("purchased_since")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("library");
                 });
 #pragma warning restore 612, 618
         }
