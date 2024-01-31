@@ -11,8 +11,10 @@ namespace PTHUWEBAPI.Database
       public DbSet<UserDTO> users { get; set; }
       public DbSet<GameStats> game_stats { get; set; }
       public DbSet<Friends> friends { get; set; }
-        public DbSet<Library> library { get; set; }
-        public AppDbContext(DbContextOptions options) : base(options)
+      public DbSet<Library> library { get; set; }
+      public DbSet<Message> messages { get; set; }
+
+       public AppDbContext(DbContextOptions options) : base(options)
      {
      }
        
