@@ -26,7 +26,7 @@ namespace SteamV2Webapi.Controllers
             return Ok(true);
         }
         [HttpPost]
-        [Route("StartLibraryItem")]
+        [Route("StartLibraryItem")]//Start game, etc
         public async Task<IActionResult> startLibaryItem(LibraryItemDTO aliDTO)
         {
             var gameAvailable = await _appDbContext.library.Where(l => l.userId == aliDTO.userId && l.gameId == aliDTO.gameId).ToListAsync() != new List<Library>();
