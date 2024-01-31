@@ -57,5 +57,16 @@ namespace SteamV2Webapi.Controllers
             await _appDbContext.SaveChangesAsync();
             return Ok();
         }
+        [HttpDelete]
+        [Route("deletemessage/{id}")]
+        public async Task<IActionResult> deletemessage(int id)
+        {
+            var message = _appDbContext.messages.FirstOrDefault(i => i.id == id);
+            if (message == null) return BadRequest();
+
+            _appDbContext.Remove(message);
+            await _appDbContext.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
