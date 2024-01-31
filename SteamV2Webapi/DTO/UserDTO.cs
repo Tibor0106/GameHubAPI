@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-
+﻿
 namespace SteamV2Webapi.DTO
 {
     public class UserDTO

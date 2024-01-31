@@ -16,13 +16,7 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.ConfigureEndpointDefaults(listenOptions =>
-    {
-        listenOptions.UseHttps("certificate.pfx", "tibor@200616");
-    });
-});
+
 
 var app = builder.Build();
 
@@ -35,6 +29,7 @@ app.UseCors(options => options
     .AllowAnyHeader()
     .AllowAnyMethod()
 );
+
 
 app.Use(async (context, next) =>
 {
