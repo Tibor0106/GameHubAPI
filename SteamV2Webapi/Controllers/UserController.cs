@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PTHUWEBAPI.Database;
 using SteamV2Webapi.DTO;
 using System.Reflection.Metadata;
 
