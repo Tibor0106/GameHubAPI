@@ -19,8 +19,16 @@ namespace SteamV2Webapi.Controllers
         [Route("register")]
          public async Task<IActionResult> register(RegisterDTO  reg)
          {
-            
-            return Ok();
+            var cUser = _appDbContext.users.FirstOrDefault(i => i.email == reg.email);
+            if (cUser != null) return BadRequest("this email already used !");
+            UserDTO user =
+                new UserDTO(0, reg.name, reg.username, 
+                reg.email, BCrypt.Net.BCrypt.HashPassword(reg.password), "", 
+                DateTime.Now, DateTime.Now, false);
+
+            _appDbContext.users.Add(user); //bármilyen módosítás után, csak mentéssel kerül be az adatbázisba
+            await _appDbContext.SaveChangesAsync();
+            return Ok();        
          }
         [HttpGet]
         [Route("verify/{verifykey}")]
