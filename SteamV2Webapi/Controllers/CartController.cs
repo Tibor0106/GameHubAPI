@@ -21,7 +21,7 @@ namespace SteamV2Webapi.Controllers
         [Route("AddCartItem")]
         public async Task<IActionResult> addCartItem(CartItemDTO ciDTO)
         {
-            _appDbContext.cart.Add(new Cart(0, ciDTO.userId, ciDTO.gameId));
+            _appDbContext.cart.Add(new Cart(ciDTO.userId, ciDTO.gameId));
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
