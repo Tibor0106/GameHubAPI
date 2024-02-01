@@ -49,7 +49,7 @@ namespace SteamV2Webapi.Controllers
         [Route("editMessage")]
         public async Task<IActionResult> EditMessage(EditMessageDTO editMessage)
         {
-            var message = _appDbContext.messages.FirstOrDefault(i => i.id == editMessage.messageId);
+            var message = _appDbContext.messages.FirstOrDefault(i => i.Id == editMessage.messageId);
             if(message == null) return BadRequest();
             message.messageBody = editMessage.newmessage;
             message.edited = true;
@@ -60,7 +60,7 @@ namespace SteamV2Webapi.Controllers
         [Route("deletemessage/{id}")]
         public async Task<IActionResult> deletemessage(int id)
         {
-            var message = _appDbContext.messages.FirstOrDefault(i => i.id == id);
+            var message = _appDbContext.messages.FirstOrDefault(i => i.Id == id);
             if (message == null) return BadRequest();
 
             _appDbContext.Remove(message);

@@ -9,8 +9,9 @@ namespace PTHUWEBAPI.Database
     {
       public DbSet<User> users { get; set; }
       public DbSet<GameStats> game_stats { get; set; }
-      public DbSet<Friend> friends { get; set; }
-      public DbSet<Library> library { get; set; }
+        public DbSet<Friend> friends { get; set; }
+        public DbSet<FriendRequest> friend_requests { get; set; }
+        public DbSet<Library> library { get; set; }
       public DbSet<Message> messages { get; set; }
       public DbSet<Cart> cart { get; set; }
       public DbSet<Category> category { get; set; }

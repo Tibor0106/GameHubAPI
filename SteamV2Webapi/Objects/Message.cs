@@ -2,16 +2,16 @@
 {
     public class Message
     {
-        public int id {  get; set; }
+        public int Id {  get; set; }
         public int senderId { get; set; }
         public int receiverId { get; set; }
         public string messageBody { get; set; }
         public DateTime messageSent { get; set; }
         public bool edited { get; set; }
 
-        public Message(int id, int senderId, int receiverId, string messageBody, DateTime messageSent, bool edited)
+        public Message(int Id, int senderId, int receiverId, string messageBody, DateTime messageSent, bool edited)
         {
-            this.id = id;
+            this.Id = Id;
             this.senderId = senderId;
             this.receiverId = receiverId;
             this.messageBody = messageBody;

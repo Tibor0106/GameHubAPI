@@ -1,15 +1,15 @@
 ﻿namespace SteamV2Webapi.Objects
 {
-    public class Cart
+    public class FriendRequest
     {
         public int Id { get; set; }
         public int userId { get; set; }
-        public int gameId { get; set; }
-        public Cart(int Id, int userId, int gameId)
+        public int friendId { get; set; }
+        public FriendRequest(int Id, int userId, int friendId)
         {
             this.Id = Id;
             this.userId = userId;
-            this.gameId = gameId;
+            this.friendId = friendId;
         }
     }
 }
