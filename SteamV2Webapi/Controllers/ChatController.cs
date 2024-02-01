@@ -51,7 +51,7 @@ namespace SteamV2Webapi.Controllers
         }
         [HttpPost]
         [Route("editMessage")]
-        public async Task<IActionResult> EditMessage(EditMessageDTO editMessage)
+        public async Task<IActionResult> editMessage(EditMessageDTO editMessage)
         {
             var message = _appDbContext.messages.FirstOrDefault(i => i.Id == editMessage.messageId);
             if(message == null) return BadRequest();
@@ -61,8 +61,8 @@ namespace SteamV2Webapi.Controllers
             return Ok();
         }
         [HttpDelete]
-        [Route("deletemessage/{id}")]
-        public async Task<IActionResult> deletemessage(int id)
+        [Route("DeleteMessage/{id}")]
+        public async Task<IActionResult> deleteMessage(int id)
         {
             var message = _appDbContext.messages.FirstOrDefault(i => i.Id == id);
             if (message == null) return BadRequest();

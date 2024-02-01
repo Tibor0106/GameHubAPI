@@ -32,7 +32,6 @@ namespace SteamV2Webapi.Controllers
             var friendRequests = _appDbContext.friend_requests.Where(i => i.userId == senderId).ToList();
             if (friendRequests.Count == 0)
                 return BadRequest();
-            await _appDbContext.SaveChangesAsync();
             return Ok(friendRequests);
         }
 

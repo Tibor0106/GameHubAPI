@@ -30,7 +30,6 @@ namespace SteamV2Webapi.Controllers
         public async Task<IActionResult> getLibraryItems(int userId)
         {
             var libraryItems = _appDbContext.library.Where(i => i.userId == userId).ToList();
-            await _appDbContext.SaveChangesAsync();
             return Ok(libraryItems);
         }
         [HttpPost]
