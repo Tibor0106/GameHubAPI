@@ -1,8 +1,8 @@
 ﻿namespace SteamV2Webapi.DTO
 {
-    public class FriendRequestDTO
+    public class StartLibraryItemDTO
     {
         public int userId { get; set; }
-        public int friendId { get; set; }
+        public int gameId { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using SteamV2Webapi.DTO;
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace SteamV2Webapi.Controllers
 {
@@ -18,19 +19,29 @@ namespace SteamV2Webapi.Controllers
 
         [HttpPut]
         [Route("SendFriendRequest")]
-        public async Task<IActionResult> sendFriendRequest(FriendDTO fDTO)
+        public async Task<IActionResult> sendFriendRequest(FriendRequestDTO fDTO)
         {
-            _appDbContext.friends.Add(new Friend(0, fDTO.userId, fDTO.friendId, new DateTime()));
+            _appDbContext.friend_requests.Add(new FriendRequest(0, fDTO.userId, fDTO.friendId));
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
+        }
+        [HttpGet]
+        [Route("GetSentFriendRequest")]
+        public async Task<IActionResult> getSentFriendRequest(int senderId)
+        {
+            var friendRequests = _appDbContext.friend_requests.Where(i => i.userId == senderId).ToList();
+            if (friendRequests.Count == 0)
+                return BadRequest();
+            await _appDbContext.SaveChangesAsync();
+            return Ok(friendRequests);
         }
 
         [HttpPost]
         [Route("AcceptFriendRequest")]
         public async Task<IActionResult> acceptFriendRequest(FriendRequestDTO frDTO)
         {
-            var friendRequest = _appDbContext.friend_requests.Where(i => i.Id == frDTO.Id).ToList()[0];
-            _appDbContext.friends.Add(new Friend(0, frDTO.userId, frDTO.friendId, new DateTime()));
+            var friendRequest = _appDbContext.friend_requests.Where(i => i.userId == frDTO.userId).ToList()[0];
+            _appDbContext.friends.Add(new Friend(0, frDTO.userId, frDTO.friendId, DateTime.Now));
             _appDbContext.friend_requests.Remove(friendRequest);
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
@@ -39,13 +50,13 @@ namespace SteamV2Webapi.Controllers
         [Route("DeclineFriendRequest")]
         public async Task<IActionResult> declineFriendRequest(FriendRequestDTO frDTO)
         {
-            var friendRequest = _appDbContext.friend_requests.Where(i => i.Id == frDTO.Id).ToList()[0];
+            var friendRequest = _appDbContext.friend_requests.Where(i => i.userId == frDTO.userId).ToList()[0];
             _appDbContext.friend_requests.Remove(friendRequest);
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("RemoveFriend")]
         public async Task<IActionResult> removeFriend(FriendDTO fDTO)
         {

@@ -3,6 +3,7 @@ using SteamV2Webapi.DTO;
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
+using Microsoft.EntityFrameworkCore;
 
 namespace SteamV2Webapi.Controllers
 {
@@ -67,7 +68,8 @@ namespace SteamV2Webapi.Controllers
         [Route("getFriends/{userid}")]
         public async Task<IActionResult> getFriends(int userid)
         {
-            return Ok();
+            var friendRequests = _appDbContext.friends.Where(i => i.userId == userid).ToList();
+            return Ok(friendRequests);
         }
         [HttpGet]
         [Route("getStats/{userid}")]
