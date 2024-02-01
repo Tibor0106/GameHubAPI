@@ -28,7 +28,7 @@ namespace SteamV2Webapi.Controllers
             return Ok(true);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("AddGameHours")]
         public async Task<IActionResult> addGameHours(AddGameHoursDTO aghDTO)
         {
@@ -39,7 +39,7 @@ namespace SteamV2Webapi.Controllers
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
-        [HttpPut]
+        [HttpPost]
         [Route("AddGameLevels")]
         public async Task<IActionResult> addGameLevels(AddGameLevelsDTO aglDTO)
         {
@@ -50,7 +50,7 @@ namespace SteamV2Webapi.Controllers
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
-        [HttpPut]
+        [HttpPost]
         [Route("AddGameAchievements")]
         public async Task<IActionResult> addGameAchievements(AddGameAchievementsDTO agaDTO)
         {

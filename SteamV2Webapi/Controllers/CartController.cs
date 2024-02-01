@@ -25,7 +25,7 @@ namespace SteamV2Webapi.Controllers
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
-        [HttpPut]
+        [HttpGet]
         [Route("getUserCart/{userid}")]
         public async Task<IActionResult> getCartItem(int userid)    
         {
