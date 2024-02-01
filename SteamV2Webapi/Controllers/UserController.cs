@@ -3,7 +3,6 @@ using SteamV2Webapi.DTO;
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
-using Microsoft.EntityFrameworkCore;
 
 namespace SteamV2Webapi.Controllers
 {
@@ -75,13 +74,19 @@ namespace SteamV2Webapi.Controllers
         [Route("getStats/{userid}")]
         public async Task<IActionResult> getStats(int userid)
         {
-            return Ok();
+            var stat = _appDbContext.game_stats.Where(i => i.userId == userid).ToList();
+            if (stat.Count == 0)
+                return BadRequest();
+            return Ok(stat);
         }
         [HttpGet]
         [Route("getStat/{userid}/{gameId}")]
         public async Task<IActionResult> getStats(int userid, int gameId)
         {
-            return Ok();
+            var stat = _appDbContext.game_stats.Where(i => i.userId == userid && i.gameId == gameId).ToList();
+            if (stat.Count == 0)
+                return BadRequest();
+            return Ok(stat[0]);
         }
 
     }
