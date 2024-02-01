@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SteamV2Webapi.DTO;
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
 using Microsoft.EntityFrameworkCore;
 using Steam2WebApi.Objects;
+using SteamV2Webapi.DTO.Transaction;
 
 namespace SteamV2Webapi.Controllers
 {

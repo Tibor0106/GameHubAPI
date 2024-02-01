@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PTHUWEBAPI.Database;
-using SteamV2Webapi.DTO;
+using SteamV2Webapi.DTO.Message;
 using SteamV2Webapi.Objects;
 
 namespace SteamV2Webapi.Controllers

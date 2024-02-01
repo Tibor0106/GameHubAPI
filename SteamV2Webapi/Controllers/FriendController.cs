@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SteamV2Webapi.DTO;
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
 using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
+using SteamV2Webapi.DTO.Friend;
 
 namespace SteamV2Webapi.Controllers
 {

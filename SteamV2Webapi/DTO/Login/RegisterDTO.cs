@@ -1,6 +1,6 @@
 ﻿using System.Reflection.Metadata;
 
-namespace SteamV2Webapi.DTO
+namespace SteamV2Webapi.DTO.Login
 {
     public class RegisterDTO
     {
@@ -9,8 +9,8 @@ namespace SteamV2Webapi.DTO
         public string email { get; set; }
         public string password { get; set; }
         public Blob avatar { get; set; }
-       
-      
+
+
 
     }
 }

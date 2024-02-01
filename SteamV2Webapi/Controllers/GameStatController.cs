@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SteamV2Webapi.DTO;
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
+using SteamV2Webapi.DTO.GameStat;
 
 namespace SteamV2Webapi.Controllers
 {

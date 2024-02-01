@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO
+﻿namespace SteamV2Webapi.DTO.Login
 {
     public class VerificationCodeDTO
     {

@@ -1,6 +1,6 @@
-﻿namespace SteamV2Webapi.DTO
+﻿namespace SteamV2Webapi.DTO.Cart
 {
-    public class DeleteLibraryItemDTO
+    public class CartItemDTO
     {
         public int userId { get; set; }
         public int gameId { get; set; }

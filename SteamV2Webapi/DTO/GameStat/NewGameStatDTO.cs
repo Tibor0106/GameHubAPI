@@ -1,6 +1,6 @@
-﻿namespace SteamV2Webapi.DTO
+﻿namespace SteamV2Webapi.DTO.GameStat
 {
-    public class AddLibraryItemDTO
+    public class NewGameStatDTO
     {
         public int userId { get; set; }
         public int gameId { get; set; }
