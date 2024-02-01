@@ -46,5 +46,27 @@ namespace SteamV2Webapi.Controllers
                 return BadRequest();
             return Ok(categories);
         }
+        [HttpGet]
+        [Route("GetPopularCategories")]
+        public async Task<IActionResult> getXPopularCategories(int x)
+        {
+            List<Category> categories = new List<Category>();
+            if (x == 0)
+                categories = _appDbContext.category.OrderByDescending(i => i.popularity).ToList();
+            else
+                categories = _appDbContext.category.OrderByDescending(i => i.popularity).Take(x).ToList();
+            if (categories.Count == 0)
+                return BadRequest();
+            return Ok(categories);
+        }
+        [HttpGet]
+        [Route("GetPopularGamesFromCategory")]
+        public async Task <IActionResult> getXPopularGamesFromYCategory(int x, int y)
+        {
+            var games = _appDbContext.games.Where(i => i.categoryId == y).OrderByDescending(i => i.popularity).Take(x).ToList();
+            if (games == null)
+                return BadRequest();
+            return Ok(games);
+        }
     }
 }
