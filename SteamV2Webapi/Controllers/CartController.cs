@@ -3,6 +3,7 @@ using SteamV2Webapi.DTO;
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
+using Microsoft.EntityFrameworkCore;
 
 namespace SteamV2Webapi.Controllers
 {
@@ -24,7 +25,24 @@ namespace SteamV2Webapi.Controllers
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
-        [HttpPost]
+        [HttpPut]
+        [Route("getUserCart/{userid}")]
+        public async Task<IActionResult> getCartItem(int userid)    
+        {
+            List<Cart> cartItems = new List<Cart>();
+            try
+            {
+               cartItems = await _appDbContext.cart.Where(m => m.userId == userid).ToListAsync();
+                if (cartItems.Count == 0) return Ok(0);
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err.Message);
+                return BadRequest();
+            }
+            return Ok(cartItems);
+        }
+        [HttpDelete]
         [Route("RemoveCartItem")]
         public async Task<IActionResult> removeLibraryItem(CartItemDTO ciDTO)
         {
