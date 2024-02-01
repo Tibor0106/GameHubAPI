@@ -27,6 +27,17 @@ namespace SteamV2Webapi.Controllers
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
+        [HttpDelete]
+        [Route("RemoveGameStat")]//IF exists.
+        public async Task<IActionResult> removeGameStat(NewGameStatDTO ngsDTO)
+        {
+            var gS = _appDbContext.game_stats.FirstOrDefault(i => i.gameId == ngsDTO.gameId && i.userId == ngsDTO.userId);
+            if (gS == null)
+                return BadRequest();
+            _appDbContext.game_stats.Remove(gS);
+            await _appDbContext.SaveChangesAsync();
+            return Ok(true);
+        }
 
         [HttpPost]
         [Route("AddGameHours")]
@@ -46,7 +57,7 @@ namespace SteamV2Webapi.Controllers
             var gS = _appDbContext.game_stats.FirstOrDefault(i => i.gameId == aglDTO.gameId && i.userId == aglDTO.userId);
             if (gS == null)
                 return BadRequest();
-            gS.achievements += aglDTO.toAddLevels;
+            gS.level += aglDTO.toAddLevels;
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }
