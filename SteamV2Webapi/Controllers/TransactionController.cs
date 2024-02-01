@@ -22,7 +22,7 @@ namespace SteamV2Webapi.Controllers
         [Route("AddTransaction")]
         public async Task<IActionResult> addTransaction(TransactionDTO tDTO)
         {
-            _appDbContext.transactions.Add(new Transaction(tDTO.Id, tDTO.transactionData, tDTO.price));
+            _appDbContext.transactions.Add(new Transaction(tDTO.transactionData, tDTO.price));
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }

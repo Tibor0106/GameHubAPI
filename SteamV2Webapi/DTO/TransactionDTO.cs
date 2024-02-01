@@ -2,8 +2,9 @@
 {
     public class TransactionDTO
     {
-        public int Id { get; set; }
-        public Dictionary<string, string>? transactionData { get; set; }
+
+        public string transactionData { get; set; } // NEM LEHET DICTIONARY, jó lesz az stringként jsben
+                                                    // úgyis parseolható
         public int price { get; set; }
     }
 }
