@@ -88,6 +88,25 @@ namespace SteamV2Webapi.Controllers
                 return BadRequest();
             return Ok(stat[0]);
         }
+        [HttpGet]
+        [Route("updateHeartBeat/{userid}")]
+        public async Task<IActionResult> updateHB(int userid)
+        {
+            var user = _appDbContext.users.FirstOrDefault(i => i.Id == userid);
+            if (user == null) return BadRequest();
+            user.last_heartbeat = DateTime.Now;
+            await _appDbContext.SaveChangesAsync();
+            return Ok();
+        }
+        [HttpGet]
+        [Route("getlastHeartBeat/{userid}")]
+        public async Task<IActionResult> getlhb(int userid)
+        {
+            var user = _appDbContext.users.FirstOrDefault(i => i.Id == userid);
+            if (user == null) return BadRequest();
+    
+            return Ok(user.last_heartbeat);
+        }
 
     }
 }
