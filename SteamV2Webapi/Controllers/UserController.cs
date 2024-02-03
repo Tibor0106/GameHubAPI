@@ -99,7 +99,7 @@ namespace SteamV2Webapi.Controllers
             return Ok();
         }
         [HttpGet]
-        [Route("getlastHeartBeat/{userid}")]
+        [Route("getLastHeartBeat/{userid}")]
         public async Task<IActionResult> getlhb(int userid)
         {
             var user = _appDbContext.users.FirstOrDefault(i => i.Id == userid);
