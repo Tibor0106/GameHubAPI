@@ -9,9 +9,9 @@
         public DateTime messageSent { get; set; }
         public bool edited { get; set; }
 
-        public Message(int Id, int senderId, int receiverId, string messageBody, DateTime messageSent, bool edited)
+        public Message(int id, int senderId, int receiverId, string messageBody, DateTime messageSent, bool edited)
         {
-            this.Id = Id;
+            this.Id = id;
             this.senderId = senderId;
             this.receiverId = receiverId;
             this.messageBody = messageBody;
