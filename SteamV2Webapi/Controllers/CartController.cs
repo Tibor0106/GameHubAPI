@@ -29,17 +29,10 @@ namespace SteamV2Webapi.Controllers
         [Route("getUserCart/{userid}")]
         public async Task<IActionResult> getCartItem(int userid)    
         {
-            List<Cart> cartItems = new List<Cart>();
-            try
-            {
-               cartItems = await _appDbContext.cart.Where(m => m.userId == userid).ToListAsync();
-                if (cartItems.Count == 0) return Ok(0);
-            }
-            catch(Exception err)
-            {
-                Console.WriteLine(err.Message);
-                return BadRequest();
-            }
+           
+          var cartItems = await _appDbContext.cart.Join(_appDbContext.games, cart => cart.gameId,game => game.Id,(cart, game) => new{ Cart = cart, Game = game}).ToListAsync();
+        
+
             return Ok(cartItems);
         }
         [HttpDelete]
