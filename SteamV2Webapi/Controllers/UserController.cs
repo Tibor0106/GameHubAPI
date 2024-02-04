@@ -21,7 +21,7 @@ namespace SteamV2Webapi.Controllers
          public async Task<IActionResult> register(RegisterDTO  reg)
          {
             var cUser = _appDbContext.users.FirstOrDefault(i => i.email == reg.email);
-            if (cUser != null) return BadRequest("this email already used !");
+            if (cUser != null) return BadRequest("this email is already used !");
             User user =
                 new User(0, reg.name, reg.username, 
                 reg.email, BCrypt.Net.BCrypt.HashPassword(reg.password), "", 
