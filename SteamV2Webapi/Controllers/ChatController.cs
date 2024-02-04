@@ -30,7 +30,7 @@ namespace SteamV2Webapi.Controllers
             page *= 20;
             var messages = await _appDbContext.messages
             .Where(m => (m.senderId == id || m.receiverId == id)) //tudtommal ha jól értelmezem, ez a chateket hozná le, magyarul egy receiverid is kell és fordítva is. Ezért kell nekünk a datetime object, hogy sorba tudjuk rakni a messageket.
-            .OrderBy(m => m.messageSent) 
+            .OrderBy(m => m.messageSent)
             .Skip((start - 1) * page / start)
             .Take(page)
             .ToListAsync();
@@ -41,11 +41,18 @@ namespace SteamV2Webapi.Controllers
 
             return Ok(messages);
         }
-        [HttpPut]
-        [Route("sendMessage")]
-        public async Task<IActionResult> sendMessage(MessageSendDTO msdto)
+        [HttpGet]
+        [Route("getMessagesWithUser/{id}/{friendId}")]
+        public async Task<IActionResult> getMessagesWithUser(int id, int friendId)
         {
-            _appDbContext.messages.Add(new Message(0, msdto.senderId, msdto.receiverId, msdto.Message, DateTime.Now, false));
+            var messages = _appDbContext.messages.Where(m => (m.senderId == id && m.receiverId == friendId) || (m.senderId == friendId && m.receiverId == id)).OrderBy(i => i.messageSent);
+            return Ok(messages);
+        }
+        [HttpPut]
+        [Route("sendMessage/{senderId}/{receiverId}/{message}")]
+        public async Task<IActionResult> sendMessage(int senderId, int receiverId, string message)
+        {
+            _appDbContext.messages.Add(new Message(0, senderId, receiverId, message, DateTime.Now, false));
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }

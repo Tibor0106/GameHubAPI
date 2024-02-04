@@ -3,6 +3,7 @@
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
 using SteamV2Webapi.DTO.Login;
+using System.Linq;
 
 namespace SteamV2Webapi.Controllers
 {
@@ -77,7 +78,14 @@ namespace SteamV2Webapi.Controllers
         [Route("getFriends/{userid}")]
         public async Task<IActionResult> getFriends(int userid)
         {
-            var friendRequests = _appDbContext.friends.Where(i => i.userId == userid).ToList();
+            var friendRequests = _appDbContext.friends.Where(i => i.userId == userid).OrderByDescending(i => i.friend_since).ToList();
+            return Ok(friendRequests);
+        }
+        [HttpGet]
+        [Route("getFriendsData/{userid}")]
+        public async Task<IActionResult> getFriendsData(int userid)
+        {
+            var friendRequests = (from f in _appDbContext.friends join u in _appDbContext.users on f.friendId equals u.Id select new { username = u.username, name = u.name, online = u.online, friend_since = f.friend_since, uid = u.Id, id = f.userId }).Where(i => i.id == userid).ToList();
             return Ok(friendRequests);
         }
         [HttpGet]
