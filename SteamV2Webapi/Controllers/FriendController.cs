@@ -2,7 +2,6 @@
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
-using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using SteamV2Webapi.DTO.Friend;
 
 namespace SteamV2Webapi.Controllers
@@ -41,6 +40,7 @@ namespace SteamV2Webapi.Controllers
         {
             var friendRequest = _appDbContext.friend_requests.Where(i => i.userId == frDTO.userId).ToList()[0];
             _appDbContext.friends.Add(new Friend(0, frDTO.userId, frDTO.friendId, DateTime.Now));
+            _appDbContext.friends.Add(new Friend(0, frDTO.friendId, frDTO.userId, DateTime.Now));
             _appDbContext.friend_requests.Remove(friendRequest);
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
@@ -57,9 +57,9 @@ namespace SteamV2Webapi.Controllers
 
         [HttpDelete]
         [Route("RemoveFriend")]
-        public async Task<IActionResult> removeFriend(FriendDTO fDTO)
+        public async Task<IActionResult> removeFriend(int userId, int friendId)
         {
-            var friend = _appDbContext.friends.FirstOrDefault(i => i.userId == fDTO.userId && i.friendId == fDTO.friendId);
+            var friend = _appDbContext.friends.FirstOrDefault(i => i.userId == userId && i.friendId == friendId);
             if (friend == null)
                 return BadRequest();
             _appDbContext.friends.Remove(friend);
