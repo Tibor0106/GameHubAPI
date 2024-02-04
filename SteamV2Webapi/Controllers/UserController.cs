@@ -3,7 +3,6 @@
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
 using SteamV2Webapi.DTO.Login;
-using System.Linq;
 
 namespace SteamV2Webapi.Controllers
 {
@@ -18,19 +17,19 @@ namespace SteamV2Webapi.Controllers
         }
         [HttpPost]
         [Route("register")]
-         public async Task<IActionResult> register(RegisterDTO  reg)
-         {
+        public async Task<IActionResult> register(RegisterDTO reg)
+        {
             var cUser = _appDbContext.users.FirstOrDefault(i => i.email == reg.email);
             if (cUser != null) return BadRequest("this email is already used !");
             User user =
-                new User(0, reg.name, reg.username, 
-                reg.email, BCrypt.Net.BCrypt.HashPassword(reg.password), "", 
+                new User(0, reg.name, reg.username,
+                reg.email, BCrypt.Net.BCrypt.HashPassword(reg.password), "",
                 DateTime.Now, DateTime.Now, false);
 
             _appDbContext.users.Add(user); //bármilyen módosítás után, csak mentéssel kerül be az adatbázisba
             await _appDbContext.SaveChangesAsync();
-            return Ok();        
-         }
+            return Ok();
+        }
         [HttpGet]
         [Route("verify/{verifykey}")]
         public async Task<IActionResult> getverify(string verifykey)
@@ -42,7 +41,7 @@ namespace SteamV2Webapi.Controllers
         public async Task<IActionResult> login(LoginDTO loginData)
         {
             var User = _appDbContext.users.FirstOrDefault(i => i.email == loginData.email);
-            if(User == null)
+            if (User == null)
             {
                 User = _appDbContext.users.FirstOrDefault(i => i.username == loginData.username);
             }
@@ -85,7 +84,7 @@ namespace SteamV2Webapi.Controllers
         [Route("getFriendsData/{userid}")]
         public async Task<IActionResult> getFriendsData(int userid)
         {
-            var friendRequests = (from f in _appDbContext.friends join u in _appDbContext.users on f.friendId equals u.Id select new { username = u.username, name = u.name, online = u.online, friend_since = f.friend_since, uid = u.Id, id = f.userId }).Where(i => i.id == userid).ToList();
+            var friendRequests = (from f in _appDbContext.friends join u in _appDbContext.users on f.friendId equals u.Id select new { username = u.username, name = u.name, online = u.online, friend_since = f.friend_since, uid = u.Id, id = f.userId, lhb = u.last_heartbeat }).Where(i => i.id == userid).ToList();
             return Ok(friendRequests);
         }
         [HttpGet]
@@ -122,9 +121,25 @@ namespace SteamV2Webapi.Controllers
         {
             var user = _appDbContext.users.FirstOrDefault(i => i.Id == userid);
             if (user == null) return BadRequest();
-    
+
             return Ok(user.last_heartbeat);
         }
 
+        [HttpGet]
+        [Route("updateHeartBeats")]
+        public async Task<IActionResult> updateHeartBeats()
+        {
+            Console.WriteLine("hi");
+            _appDbContext.users.ToList().ForEach(i =>
+            {
+                Console.WriteLine(i.last_heartbeat.AddMinutes(2) < DateTime.Now);
+                if (i.last_heartbeat.AddMinutes(2) < DateTime.Now)
+                    i.online = false;
+                else
+                    i.online = true;
+                _appDbContext.SaveChanges();
+            });
+            return Ok();
+        }
     }
 }

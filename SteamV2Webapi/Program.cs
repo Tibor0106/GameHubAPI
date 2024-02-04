@@ -12,7 +12,12 @@ builder.Services.AddControllers();
 // Swagger/OpenAPI konfigurációja: https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddSingleton(new HeartBeatSettings()
+{
+    Frequency = TimeSpan.FromSeconds(5),
+    Target = "http://192.168.1.148:5000/User/updateHeartBeats"
+});
+builder.Services.AddHostedService<HeartBeatChecker>();
 
 
 var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");

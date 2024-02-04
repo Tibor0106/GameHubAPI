@@ -2,7 +2,6 @@
 
 using PTHUWEBAPI.Database;
 using SteamV2Webapi.Objects;
-using Microsoft.EntityFrameworkCore;
 using SteamV2Webapi.DTO.Game;
 
 namespace SteamV2Webapi.Controllers
