@@ -48,11 +48,11 @@ namespace SteamV2Webapi.Controllers
             var messages = _appDbContext.messages.Where(m => (m.senderId == id && m.receiverId == friendId) || (m.senderId == friendId && m.receiverId == id)).OrderBy(i => i.messageSent);
             return Ok(messages);
         }
-        [HttpPut]
+        [HttpGet]
         [Route("sendMessage/{senderId}/{receiverId}/{message}")]
         public async Task<IActionResult> sendMessage(int senderId, int receiverId, string message)
         {
-            _appDbContext.messages.Add(new Message(0, senderId, receiverId, message, DateTime.Now, false));
+            _appDbContext.messages.Add(new Message(senderId, receiverId, message, DateTime.Now, false));
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }

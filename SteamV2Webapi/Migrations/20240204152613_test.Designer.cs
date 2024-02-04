@@ -11,8 +11,8 @@ using PTHUWEBAPI.Database;
 namespace SteamV2Webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240202110310_s")]
-    partial class s
+    [Migration("20240204152613_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
