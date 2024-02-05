@@ -133,7 +133,7 @@ namespace SteamV2Webapi.Controllers
             _appDbContext.users.ToList().ForEach(i =>
             {
                 Console.WriteLine(i.last_heartbeat.AddMinutes(2) < DateTime.Now);
-                if (i.last_heartbeat.AddMinutes(2) < DateTime.Now)
+                if (i.last_heartbeat.AddSeconds(10) < DateTime.Now)
                     i.online = false;
                 else
                     i.online = true;
