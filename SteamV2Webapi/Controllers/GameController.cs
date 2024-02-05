@@ -38,6 +38,15 @@ namespace SteamV2Webapi.Controllers
 
             return Ok(game);
         }
+        [HttpGet]
+        [Route("GetGameByLinkId/{gamelinkId}")]
+        public async Task<IActionResult> getGameByLinkId(string gamelinkId)
+        {
+
+            var game = _appDbContext.games.FirstOrDefault(i => i.linkId == gamelinkId);
+            if (game == null) BadRequest();
+            return Ok(game);
+        }
         [HttpPost]
         [Route("EditGameStatistics/{gameId}")]
         public async Task<IActionResult> editGameStatistics(EditGameDTO egDTO, int gameId)

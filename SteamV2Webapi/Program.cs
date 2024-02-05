@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(new HeartBeatSettings()
 {
     Frequency = TimeSpan.FromSeconds(5),
-    Target = "http://192.168.221.55:5000/User/updateHeartBeats"
+    Target = "http://192.168.1.82:5000/User/updateHeartBeats"
 });
 builder.Services.AddHostedService<HeartBeatChecker>();
 
