@@ -38,11 +38,11 @@ namespace SteamV2Webapi.Controllers
         [HttpGet]
         [Route("getUserCartTotal/{userid}")]
         public async Task<IActionResult> getUserCartTotal(int userid) {
-            var cartTotal = (from c in _appDbContext.cart join s in _appDbContext.shop on c.gameId equals s.gameId select new {price = s.price}).Where(i => i.userId == userid).ToList();
+            var cartTotal = (from c in _appDbContext.cart join s in _appDbContext.shop on c.gameId equals s.gameId select new {price = s.price, uid = c.userId}).Where(i => i.uid == userid).ToList();
             var data = new List<int>();
-            data.Add(cartTotal.Count);
+            data.Add(cartTotal.Count());
             int total = 0;
-            for(int k = 0; k < cartTotal.Count; k++) {
+            for(int k = 0; k < cartTotal.Count(); k++) {
                 total += cartTotal[k].price;
             }
             data.Add(total);
