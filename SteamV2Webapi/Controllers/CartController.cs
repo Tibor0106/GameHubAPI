@@ -35,6 +35,19 @@ namespace SteamV2Webapi.Controllers
 
             return Ok(cartItems);
         }
+        [HttpGet]
+        [Route("getUserCartTotal/{userid}")]
+        public async Task<IActionResult> getUserCartTotal(int userid) {
+            var cartTotal = await _appDbContext.cart.Where(i => i.userId == userid).ToList();
+            var data = new List<int>();
+            data.Add(cartTotal.Count);
+            int total = 0;
+            for(int k = 0; k < cartTotal.Count; k++) {
+                total += cartTotal[k].price;
+            }
+            data.Add(total);
+            return Ok(data);
+        }
         [HttpDelete]
         [Route("RemoveCartItem")]
         public async Task<IActionResult> removeLibraryItem(CartItemDTO ciDTO)
