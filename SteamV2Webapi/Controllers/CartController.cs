@@ -29,8 +29,19 @@ namespace SteamV2Webapi.Controllers
         [Route("getUserCart/{userid}")]
         public async Task<IActionResult> getCartItem(int userid)    
         {
-           
-          var cartItems = await _appDbContext.cart.Join(_appDbContext.games, cart => cart.gameId,game => game.Id,(cart, game) => new{ Cart = cart, Game = game}).ToListAsync();
+
+            var cartItems = (from c in _appDbContext.cart
+                             join s in _appDbContext.shop on c.gameId equals s.gameId
+                             join g in _appDbContext.games on c.gameId equals g.Id
+                             select new
+                             {
+                                 cid = c.Id,
+                                 uid = c.userId,
+                                 name = g.name,
+                                 shortdesc = g.shortdescr,
+                                 price = s.price,
+                                 banner = g.banner
+                             }).Where(i => i.uid == userid).ToList();
         
 
             return Ok(cartItems);
@@ -48,11 +59,11 @@ namespace SteamV2Webapi.Controllers
             data.Add(total);
             return Ok(data);
         }
-        [HttpDelete]
-        [Route("RemoveCartItem")]
-        public async Task<IActionResult> removeLibraryItem(CartItemDTO ciDTO)
+        [HttpGet]
+        [Route("RemoveCartItem/{cartId}")]
+        public async Task<IActionResult> removeCartItem(int cartId)
         {
-            var cartItem = _appDbContext.cart.FirstOrDefault(i => i.userId == ciDTO.userId && i.gameId == ciDTO.gameId);
+            var cartItem = _appDbContext.cart.FirstOrDefault(i => i.Id == cartId);
             if (cartItem == null)
                 return BadRequest();
             _appDbContext.cart.Remove(cartItem);
