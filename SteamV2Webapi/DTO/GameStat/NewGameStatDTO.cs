@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.GameStat
+﻿namespace GameHubAPI.DTO.GameStat
 {
     public class NewGameStatDTO
     {

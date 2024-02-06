@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PTHUWEBAPI.Database;
-using SteamV2Webapi.DTO.Message;
-using SteamV2Webapi.Objects;
+using GameHubAPI.DTO.Message;
+using GameHubAPI.Objects;
 
-namespace SteamV2Webapi.Controllers
+namespace GameHubAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]

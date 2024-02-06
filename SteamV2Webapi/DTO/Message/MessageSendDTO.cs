@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Message
+﻿namespace GameHubAPI.DTO.Message
 {
     public class MessageSendDTO
     {

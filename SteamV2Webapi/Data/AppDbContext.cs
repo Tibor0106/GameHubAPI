@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Steam2WebApi.Objects;
-using SteamV2Webapi.Objects;
+using GameHubAPI.Objects;
 
 
 namespace PTHUWEBAPI.Database

@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace SteamV2Webapi.DTO.Login
+﻿namespace GameHubAPI.DTO.Login
 {
     public class RegisterDTO
     {

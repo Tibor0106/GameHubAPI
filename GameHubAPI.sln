@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamV2Webapi", "SteamV2Webapi\SteamV2Webapi.csproj", "{0DEB0225-6D52-477F-BE49-23A2DEE3CF1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameHubAPI", "SteamV2Webapi\GameHubAPI.csproj", "{0DEB0225-6D52-477F-BE49-23A2DEE3CF1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

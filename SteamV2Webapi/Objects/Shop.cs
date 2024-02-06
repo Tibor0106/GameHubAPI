@@ -1,5 +1,5 @@
 
-namespace SteamV2Webapi.Objects
+namespace GameHubAPI.Objects
 {
     public class Shop
     {

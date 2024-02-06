@@ -1,4 +1,4 @@
-namespace Steam2WebApi.Objects
+namespace GameHubAPI.Objects
 {
     public class Transaction
     {

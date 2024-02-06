@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Cart
+﻿namespace GameHubAPI.DTO.Cart
 {
     public class CartItemDTO
     {

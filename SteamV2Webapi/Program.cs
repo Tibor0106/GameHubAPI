@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PTHUWEBAPI.Database;
-using SteamV2Webapi;
-using System;
+using GameHubAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 

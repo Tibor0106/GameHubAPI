@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Category
+﻿namespace GameHubAPI.DTO.Category
 {
     public class GetCategoryDTO
     {

@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Friend
+﻿namespace GameHubAPI.DTO.Friend
 {
     public class FriendRequestDTO
     {

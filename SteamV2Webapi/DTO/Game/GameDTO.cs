@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Game
+﻿namespace GameHubAPI.DTO.Game
 {
     public class GameDTO
     {

@@ -1,8 +1,7 @@
-﻿namespace SteamV2Webapi
+﻿namespace GameHubAPI
 {
     using Microsoft.Extensions.Hosting;
     using System.Net.Http;
-    using System.Net.NetworkInformation;
     public class HeartBeatSettings
     {
         public TimeSpan Frequency { get; set; }

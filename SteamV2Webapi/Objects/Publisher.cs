@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace SteamV2Webapi.Objects
+﻿namespace GameHubAPI.Objects
 {
     public class Publisher
     {

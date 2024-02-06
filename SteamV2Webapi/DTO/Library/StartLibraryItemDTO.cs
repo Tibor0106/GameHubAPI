@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Library
+﻿namespace GameHubAPI.DTO.Library
 {
     public class StartLibraryItemDTO
     {

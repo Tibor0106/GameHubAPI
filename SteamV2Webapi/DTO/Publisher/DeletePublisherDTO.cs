@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Publisher
+﻿namespace GameHubAPI.DTO.Publisher
 {
     public class DeletePublisherDTO
     {

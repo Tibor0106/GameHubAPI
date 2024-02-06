@@ -1,4 +1,4 @@
-﻿namespace SteamV2Webapi.DTO.Transaction
+﻿namespace GameHubAPI.DTO.Transaction
 {
     public class TransactionDTO
     {
