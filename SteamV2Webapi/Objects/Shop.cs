@@ -1,4 +1,3 @@
-
 namespace GameHubAPI.Objects
 {
     public class Shop
