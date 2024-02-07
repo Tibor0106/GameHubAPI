@@ -24,7 +24,7 @@ namespace GameHubAPI.Controllers
             return Ok(true);
         }
         [HttpGet]
-        [Route("GetLibraryItems")]
+        [Route("GetLibraryItems/{userid}")]
         public async Task<IActionResult> getLibraryItems(int userId)
         {
             var libraryItems = _appDbContext.library.Where(i => i.userId == userId).ToList();
