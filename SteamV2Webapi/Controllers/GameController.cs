@@ -2,6 +2,7 @@
 using PTHUWEBAPI.Database;
 using GameHubAPI.Objects;
 using GameHubAPI.DTO.Game;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameHubAPI.Controllers
 {
@@ -91,6 +92,17 @@ namespace GameHubAPI.Controllers
             _appDbContext.games.Remove(game);
             await _appDbContext.SaveChangesAsync();
             return Ok();
+        }
+        [HttpGet]
+        [Route("searchGame/{q}")]
+        public async Task<IActionResult> SearchGame(string q)
+        {
+             var games = await _appDbContext.games
+                    .Where(i => i.name.ToLower().Contains(q.ToLower()))
+                    .ToListAsync();
+
+                return Ok(games);
+                
         }
     }
 }
