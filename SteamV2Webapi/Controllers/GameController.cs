@@ -28,7 +28,11 @@ namespace GameHubAPI.Controllers
         public async Task<IActionResult> getGame(int gameId)
         {
             if (gameId == 0)
-                return _appDbContext.games.ToList().Count > 0 ? Ok(_appDbContext.games.ToList()) : BadRequest();
+                return (from g in _appDbContext.games
+                        join s in _appDbContext.shop on g.Id equals s.gameId
+                        select new { game = g, shop = s }).ToList().Count > 0 ? Ok((from g in _appDbContext.games
+                                                                                                     join s in _appDbContext.shop on g.Id equals s.gameId
+                                                                                                     select new { game = g, shop = s })) : BadRequest();
 
             var game = _appDbContext.games.Where(i => i.Id == gameId).FirstOrDefault();
 
