@@ -20,6 +20,8 @@ namespace GameHubAPI.Controllers
         public async Task<IActionResult> sendFriendRequest(FriendRequestDTO fDTO)
         {
             _appDbContext.friend_requests.Add(new FriendRequest(0, fDTO.userId, fDTO.friendId));
+            var sendingUser = _appDbContext.users.Where(i => i.Id == fDTO.userId).ToList()[0];
+            _appDbContext.notifications.Add(new Notification(0, fDTO.friendId, 1, sendingUser.avatar, fDTO.userId, "", DateTime.Now));
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }

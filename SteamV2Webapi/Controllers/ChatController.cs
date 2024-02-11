@@ -53,6 +53,11 @@ namespace GameHubAPI.Controllers
         public async Task<IActionResult> sendMessage(int senderId, int receiverId, string message)
         {
             _appDbContext.messages.Add(new Message(senderId, receiverId, message, DateTime.Now, false));
+            var receiver = _appDbContext.users.Where(i => i.Id == receiverId).ToList()[0];
+            if (receiver.online == false) {
+                var sendingUser = _appDbContext.users.Where(i => i.Id == senderId).ToList()[0];
+                _appDbContext.notifications.Add(new Notification(0, receiverId, 2, sendingUser.avatar, senderId, "", DateTime.Now));
+            }
             await _appDbContext.SaveChangesAsync();
             return Ok(true);
         }

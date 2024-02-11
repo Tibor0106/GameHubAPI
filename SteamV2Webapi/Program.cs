@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(new HeartBeatSettings()
 {
     Frequency = TimeSpan.FromSeconds(5),
-    Target = "http://192.168.1.82:5000/User/updateHeartBeats"
+    Target = "http://192.168.1.148:5000/User/updateHeartBeats"
 });
 builder.Services.AddHostedService<HeartBeatChecker>();
 
@@ -39,9 +39,7 @@ app.UseCors(options => options
 app.Use(async (context, next) =>
 {
     if (context.Request.Method == "OPTIONS")
-    {
-        // Logolás példája
-        Console.WriteLine("OPTIONS request received");
+    {;
 
         context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
         context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");

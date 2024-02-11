@@ -28,9 +28,6 @@
                 {
                     HttpClient httpClient = new HttpClient();
                     using HttpResponseMessage response = await httpClient.GetAsync(HeartBeatCheckerSettings.Target);
-
-                    Console.WriteLine(response.EnsureSuccessStatusCode());
-
                     var jsonResponse = await response.Content.ReadAsStringAsync();
                 }
                 catch (Exception ex)
