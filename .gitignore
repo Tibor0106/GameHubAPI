@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+SteamV2Webapi/appsettings.json
+SteamV2Webapi/Program.cs
